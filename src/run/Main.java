@@ -22,7 +22,7 @@ public class Main {
 
         main.runTrendHoppingShortTerm_Strategy();
 
-        Statistics.SHOW_GROWTH_PER_DAY();
+        Statistics.SHOW_GROWTH_PER_MONTH();
 
 
         /*for (int i=0;i<50;i++) {
@@ -44,6 +44,8 @@ public class Main {
         TrendHoppingShortTerm.importList(list);
         TrendHoppingShortTerm.setLastValue(1);
         TrendHoppingShortTerm.initStrategy();
+
+        Logger.logStart("Starting TrendHoppingShortTerm with a value of "+TrendHoppingShortTerm.getLastValue());
 
         for (DataStamp dataStamp : list){
             TrendHoppingShortTerm.run(dataStamp.getOHLC());

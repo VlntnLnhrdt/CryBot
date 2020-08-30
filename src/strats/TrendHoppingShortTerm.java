@@ -25,10 +25,13 @@ public class TrendHoppingShortTerm {
         LASTVALUE = value;
     }
 
+    public static int getLastValue() {
+        return LASTVALUE;
+    }
+
     public static void initStrategy(){
         oldValue = 0;
         libra = 0;
-        Logger.logStart("Starting TrendHoppingShortTerm with "+LIST.size()+" DataStamps and a value of "+LASTVALUE);
     }
 
     public static void run(double newValue) {
