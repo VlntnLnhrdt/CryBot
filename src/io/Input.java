@@ -35,7 +35,7 @@ public class Input {
             rd.close();
 
         } catch (FileNotFoundException e) {
-            System.err.println("Datei konnte nicht gefunden werden, bitte überprüfen Sie Ihre Eingabe!");
+            System.err.println("File not found! Correct the filename and retry.");
         } catch (IOException e) {
             e.printStackTrace();
         }
