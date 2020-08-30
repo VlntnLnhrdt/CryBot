@@ -66,7 +66,7 @@ public class Bank {
 
     public static void saveTrades() {
         TRADES.add("Lost trough Fees: " +FEELOST+"€ and "+OVERALLSALES+"€ overall sales");
-        Output.writeData("Trade-History", TRADES);
+        Output.writeData("Trade-History.csv", TRADES);
     }
 
     public static void printResults(double price) {
