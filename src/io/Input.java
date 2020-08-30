@@ -17,7 +17,6 @@ public class Input {
         Logger.logStart("Reading "+fileName);
 
         List<DataStamp> list = new ArrayList<>();
-        List<DataStamp> reversedList = new ArrayList<>();
         String line;
 
         try {
@@ -30,13 +29,10 @@ public class Input {
 
                 String[] splits = line.split(",");
 
-                list.add(new DataStamp(splits[1], ((Double.parseDouble(splits[2]) + Double.parseDouble(splits[3]) + Double.parseDouble(splits[4]) + Double.parseDouble(splits[5])) / 4)));
+                list.add(0, new DataStamp(splits[1], ((Double.parseDouble(splits[2]) + Double.parseDouble(splits[3]) + Double.parseDouble(splits[4]) + Double.parseDouble(splits[5])) / 4)));
             }
 
             rd.close();
-
-            for (int i = list.size() - 1; i >= 0; i--)
-                reversedList.add(list.get(i));
 
         } catch (FileNotFoundException e) {
             System.err.println("Datei konnte nicht gefunden werden, bitte überprüfen Sie Ihre Eingabe!");
@@ -46,9 +42,9 @@ public class Input {
 
         Logger.logEnd();
 
-        Output.writeDataStamps(fileName+"_generated.csv",reversedList);
+        Output.writeDataStamps(fileName+"_generated.csv",list);
 
-        return reversedList;
+        return list;
     }
 
 }
