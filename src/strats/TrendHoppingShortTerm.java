@@ -2,11 +2,8 @@ package strats;
 
 import etc.Bank;
 import etc.DataStamp;
-import etc.Properties;
 import etc.Statistics;
-import io.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrendHoppingShortTerm {
@@ -37,6 +34,7 @@ public class TrendHoppingShortTerm {
     public static void run(DataStamp newValue) {
 
        if(oldValue != 0) {
+
             // INFO Wenns fällt und bsp -1 ist, muss der Wert zweimal steigen um den "LastValues" Wert von 1 zu erreichen
 
             if (oldValue < newValue.getOHLC())
@@ -53,17 +51,10 @@ public class TrendHoppingShortTerm {
                 Bank.sell(newValue);
                 libra++;
             }
-
         }
 
         Statistics.gatherStats(newValue.getOHLC());
 
         oldValue = newValue.getOHLC();
-
     }
-
-
-
-
-
 }
