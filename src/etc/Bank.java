@@ -13,8 +13,6 @@ public class Bank {
     private static double TOKEN = 0;
     private static double CAPITAL = Properties.CAPITAL;
 
-    public static List<Double> CAPITAL_HISTORY = new ArrayList<>();
-
     // NumberOfTrades
     private static int NOT = 0;
 
@@ -47,8 +45,6 @@ public class Bank {
 
             BUYPRICE = price;
 
-            CAPITAL_HISTORY.add(TOKEN * price);
-
             TRADE = (NOT++) + " - BUY at " + cutDouble(price) + "€ ";
         }
     }
@@ -64,8 +60,6 @@ public class Bank {
             TRADE += "SELL at " + cutDouble(price) + "€ with a result of " + cutDouble(price - BUYPRICE) + "€ equals " + cutDouble((price - BUYPRICE) * TOKEN) + "€";
 
             TOKEN = 0;
-
-            CAPITAL_HISTORY.add(CAPITAL);
 
             BUYPRICE = 0;
         }
@@ -91,18 +85,19 @@ public class Bank {
         return CAPITAL;
     }
 
-    public static void PRINT_CAPITAL_GRAPH_TOTAL(){
-        for(Double d : CAPITAL_HISTORY)
-            System.out.println(d);
-    }
 
     public static int GET_TRADES_TOTAL(){
         return NOT * 2;
     }
 
 
+    public static double getTOKEN() {
+        return TOKEN;
+    }
 
-
+    public static double getCAPITAL() {
+        return CAPITAL;
+    }
 
     // Abschneiden von überflüssigen Kommastellen
     public static double cutDouble(double number){

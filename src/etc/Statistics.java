@@ -7,10 +7,22 @@ public class Statistics {
 
 
     static List<Double> PAST_CAPITAL = new ArrayList<>();
+    private static double iterator = 0;
 
+    public static void gatherStats(double price){
 
-    public static void gatherStats(double newCapital){
-        PAST_CAPITAL.add(newCapital);
+        if (iterator % 24 == 0) {
+
+            if(Bank.getCAPITAL() == 0){
+                PAST_CAPITAL.add(Bank.getTOKEN() * price);
+            }else{
+                PAST_CAPITAL.add(Bank.getCAPITAL());
+            }
+
+        }
+
+        iterator++;
+
     }
 
 
@@ -66,6 +78,8 @@ public class Statistics {
 
         for(int i = 30; i < PAST_CAPITAL.size()-1; i+=30)
             System.out.println("Month " + i/30 + ": " + CALC_GROWTH_IN_PERCENT(30, i) + "% = " + CALC_GROWTH_IN_CURRENCY(30, i) + "€  Total Capital: " + PAST_CAPITAL.get(i) + "€");
+
+
     }
 
     public static void SHOW_GROWTH_PER_YEAR(){
@@ -76,6 +90,14 @@ public class Statistics {
             System.out.println("Year " + i/365 + ": " + CALC_GROWTH_IN_PERCENT(365, i) + "% = " + CALC_GROWTH_IN_CURRENCY(365, i) + "€  Total Capital: " + PAST_CAPITAL.get(i) + "€");
     }
 
+    public static void resetStatistics(){
+        PAST_CAPITAL.clear();
+        iterator = 0;
+    }
+
+    public static double getIterator(){
+        return iterator;
+    }
 
 }
 
