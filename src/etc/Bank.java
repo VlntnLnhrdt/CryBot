@@ -7,9 +7,6 @@ import java.util.List;
 
 public class Bank {
 
-    // TODO Gebührenintegration
-    // TODO Gebührenintegration mit Gesamtverlust
-
     private static double TOKEN = 0;
     private static double CAPITAL = Properties.CAPITAL;
 
