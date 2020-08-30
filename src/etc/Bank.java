@@ -17,7 +17,8 @@ public class Bank {
     private static int NOT = 1;
 
     private static List<String> TRADES = new ArrayList<>();
-    private static String TRADE        = "Trading History";
+    private static String TRADE   = "Trading History\n" +
+            "TradeNo - Timestamp - Info";
 
     private static double FEELOST      = 0;
     private static double OVERALLSALES = 0;
