@@ -10,17 +10,19 @@ public class DataStamp {
         return OHLC;
     }
 
+    public String getTIMESTAMP() { return TIMESTAMP; }
+
     private final String SYMBOL;
     private final String TIMESTAMP;
     private final double OHLC;
 
-    public DataStamp(String symbol, String timestamp, double ohlc) {
+    public DataStamp(String timestamp, String symbol, double ohlc) {
         this.SYMBOL    = symbol;
         this.TIMESTAMP = timestamp;
         this.OHLC      = ohlc;
     }
 
     public String print() {
-        return getSYMBOL()+","+getOHLC();
+        return getTIMESTAMP()+","+getSYMBOL()+","+getOHLC();
     }
 }

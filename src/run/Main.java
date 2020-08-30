@@ -36,7 +36,7 @@ public class Main {
         // TODO Api hier aktiv
 
         for (DataStamp dataStamp : list){
-            TrendHoppingShortTerm.run(dataStamp.getOHLC());
+            TrendHoppingShortTerm.run(dataStamp);
         }
 
         Logger.logEnd();

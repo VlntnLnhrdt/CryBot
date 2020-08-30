@@ -14,7 +14,7 @@ public class Bank {
     private static double CAPITAL = Properties.CAPITAL;
 
     // NumberOfTrades
-    private static int NOT = 0;
+    private static int NOT = 1;
 
     private static List<String> TRADES = new ArrayList<>();
     private static String TRADE        = "Trading History";
@@ -27,37 +27,38 @@ public class Bank {
     public static void reset() {
         TOKEN   = 0;
         CAPITAL = Properties.CAPITAL;
-        NOT     = 0;
+        NOT     = 1;
         TRADES  = new ArrayList<>();
-        TRADE   = "Trading History";
+        TRADE   = "Trading History\n" +
+                "TradeNo - Timestamp - Info";
         FEELOST = 0;
     }
 
-    public static void buy(double price) {
+    public static void buy(DataStamp value) {
         if (TOKEN == 0 && CAPITAL > 0) {
             FEELOST += CAPITAL * Properties.FEE;
 
             OVERALLSALES += CAPITAL;
 
-            TOKEN = (CAPITAL * Properties.CALCFEE) / price;
+            TOKEN = (CAPITAL * Properties.CALCFEE) / value.getOHLC();
             CAPITAL = 0;
             TRADES.add(TRADE);
 
-            BUYPRICE = price;
+            BUYPRICE = value.getOHLC();
 
-            TRADE = (NOT++) + " - BUY at " + cutDouble(price) + "€ ";
+            TRADE = (NOT++) + " - "+ value.getTIMESTAMP() +" - BUY at " + cutDouble(value.getOHLC()) + "€ ";
         }
     }
 
-    public static void sell(double price) {
+    public static void sell(DataStamp value) {
         if (CAPITAL == 0 && TOKEN > 0) {
             FEELOST += CAPITAL * Properties.FEE;
 
-            OVERALLSALES += TOKEN * price;
+            OVERALLSALES += TOKEN * value.getOHLC();
 
-            CAPITAL = (TOKEN * price) * Properties.CALCFEE;
+            CAPITAL = (TOKEN * value.getOHLC()) * Properties.CALCFEE;
 
-            TRADE += "SELL at " + cutDouble(price) + "€ with a result of " + cutDouble(price - BUYPRICE) + "€ equals " + cutDouble((price - BUYPRICE) * TOKEN) + "€";
+            TRADE += "SELL at " + cutDouble(value.getOHLC()) + "€ with a result of " + (cutDouble(value.getOHLC()) - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
 
             TOKEN = 0;
 

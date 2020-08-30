@@ -34,14 +34,14 @@ public class TrendHoppingShortTerm {
         libra = 0;
     }
 
-    public static void run(double newValue) {
+    public static void run(DataStamp newValue) {
 
        if(oldValue != 0) {
             // INFO Wenns fällt und bsp -1 ist, muss der Wert zweimal steigen um den "LastValues" Wert von 1 zu erreichen
 
-            if (oldValue < newValue)
+            if (oldValue < newValue.getOHLC())
                 libra++;
-            else if (oldValue > newValue)
+            else if (oldValue > newValue.getOHLC())
                 libra--;
 
 
@@ -56,9 +56,9 @@ public class TrendHoppingShortTerm {
 
         }
 
-        Statistics.gatherStats(newValue);
+        Statistics.gatherStats(newValue.getOHLC());
 
-        oldValue = newValue;
+        oldValue = newValue.getOHLC();
 
     }
 
