@@ -13,7 +13,6 @@ import java.util.List;
 public class Main {
 
     List<DataStamp> list;
-    List<Double> results;
 
     public static void main(String[] args) {
 
@@ -22,20 +21,7 @@ public class Main {
 
         main.runTrendHoppingShortTerm_Strategy();
 
-        Statistics.SHOW_GROWTH_PER_MONTH();
-
-
-        /*for (int i=0;i<50;i++) {
-            TrendHoppingShortTerm.setLastValue(i);
-            TrendHoppingShortTerm.run();
-            Bank.printResults(list.get(list.size() - 1).getOHLC());
-            results.add(Bank.getResults(list.get(list.size()-1).getOHLC()));
-            Bank.reset();
-        }
-
-        for (int i=0;i<results.size();i++) {                9960.5
-            System.out.println(i+" - "+results.get(i));
-        }*/
+        Statistics.SHOW_GROWTH_PER_DAY();
 
     }
 
@@ -46,6 +32,8 @@ public class Main {
         TrendHoppingShortTerm.initStrategy();
 
         Logger.logStart("Starting TrendHoppingShortTerm with a value of "+TrendHoppingShortTerm.getLastValue());
+
+        // TODO Api hier aktiv
 
         for (DataStamp dataStamp : list){
             TrendHoppingShortTerm.run(dataStamp.getOHLC());
