@@ -1,0 +1,3 @@
+Die Strategien sind nur zu Testzwecken erstellt worden und können so nicht im produktiven System laufen
+Es wird lediglich die Liste der Daten übergeben und die Strat.Klasse geht diese selbstständig durch
+Ziel ist das Testen der jeweiligen Strategie
