@@ -59,7 +59,7 @@ public class Bank {
 
             CAPITAL = (TOKEN * value.getOHLC()) * Properties.CALCFEE;
 
-            TRADE += "SELL at " + cutDouble(value.getOHLC()) + "€ with a result of " + (cutDouble(value.getOHLC()) - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
+            TRADE += "SELL at " + cutDouble(value.getOHLC()) + "€ with a result of " + cutDouble(value.getOHLC() - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
 
             TOKEN = 0;
 
