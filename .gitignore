@@ -25,3 +25,5 @@ hs_err_pid*
 #other files
 *.txt
 *.csv
+
+.idea/

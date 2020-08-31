@@ -7,9 +7,6 @@ import java.util.List;
 
 public class Bank {
 
-    // TODO Gebührenintegration
-    // TODO Gebührenintegration mit Gesamtverlust
-
     private static double TOKEN = 0;
     private static double CAPITAL = Properties.CAPITAL;
 
@@ -59,7 +56,7 @@ public class Bank {
 
             CAPITAL = (TOKEN * value.getOHLC()) * Properties.CALCFEE;
 
-            TRADE += "SELL at " + cutDouble(value.getOHLC()) + "€ with a result of " + (cutDouble(value.getOHLC()) - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
+            TRADE += "SELL at " + cutDouble(value.getOHLC()) + "€ with a result of " + cutDouble(value.getOHLC() - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
 
             TOKEN = 0;
 
@@ -69,7 +66,7 @@ public class Bank {
 
     public static void saveTrades() {
         TRADES.add("Lost trough Fees: " +FEELOST+"€ and "+OVERALLSALES+"€ overall sales");
-        Output.writeData("Trade-History", TRADES);
+        Output.writeData("Trade-History.csv", TRADES);
     }
 
     public static void printResults(double price) {
