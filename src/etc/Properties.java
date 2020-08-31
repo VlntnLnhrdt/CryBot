@@ -19,4 +19,10 @@ public class Properties {
     // Abfragerythmus in ms
     public static int REQUESTTIME = 60000;
 
+    // Benennung der Responses-Datei
+    public static String REPONSE_FILE_ENDING = " Response-List.csv";
+
+    // Head der Reponses-Datei
+    public static String RESPONSE_FILE_HEAD = "Response No - OHLC - origial unfiltered reponse";
+
 }
