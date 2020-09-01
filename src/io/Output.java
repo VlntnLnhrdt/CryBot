@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Output {
 
+    // Schreiben von DataStamps (vereinfachte Datenansicht)
     public static void writeDataStamps(String name, List<DataStamp> list) {
 
         List<String> newList = new ArrayList<>();
@@ -22,10 +23,12 @@ public class Output {
 
     }
 
+    // Schreiben von Daten jeglicher Art mit Logger
     public static void writeData(String name, List<String> list) {
         writeData(name, list, true);
     }
 
+    // Schreiben von Daten jeglicher Art mit optinalem Logger
     public static void writeData(String name, List<String> list, boolean log) {
 
         if (log)
@@ -38,7 +41,6 @@ public class Output {
                 wr.write(line);
                 wr.newLine();
             }
-
             wr.close();
 
         } catch (IOException e) {
@@ -47,8 +49,6 @@ public class Output {
 
         if (log)
             Logger.logEnd();
-
-
     }
 
 }
