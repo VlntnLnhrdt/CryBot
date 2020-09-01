@@ -34,7 +34,7 @@ public class Bank {
     }
 
     public static void buy(DataStamp value) {
-        if (TOKEN == 0 && CAPITAL > 0) {
+        if (TOKEN == 0 && CAPITAL > 0 && value.getOHLC() - value.getClose() > -100) {//die differenz zwischen breechnetem- und richtigen-Preis darf maximal 100€ betragen
 
             FEELOST += CAPITAL * Properties.FEE; // Verlust durch Gebühren
 
@@ -47,11 +47,14 @@ public class Bank {
             BUYPRICE = value.getOHLC();
 
             TRADE = (NOT++) + " - BUY at "+ value.getTIMESTAMP() +" for " + cutDouble(value.getOHLC()) + "€";
+
+           // System.out.println(value.getOHLC() - value.getClose());
+
         }
     }
 
     public static void sell(DataStamp value) {
-        if (CAPITAL == 0 && TOKEN > 0) {
+        if (CAPITAL == 0 && TOKEN > 0 && value.getOHLC() - value.getClose() < 100) {
             FEELOST += CAPITAL * Properties.FEE;
 
             OVERALLSALES += TOKEN * value.getOHLC();
@@ -61,17 +64,19 @@ public class Bank {
             TRADE += " - SELL at " + value.getTIMESTAMP() + " for " + cutDouble(value.getOHLC()) + "€ with a result of " + cutDouble(value.getOHLC() - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
 
             // Live-Writing der Trade-History Datei
-            DATEWEEK = new Date();
-            List<String> LASTTRADES = Input.getContent(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING);
+//            DATEWEEK = new Date();
+//            List<String> LASTTRADES = Input.getContent(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING);
+//
+//            if (LASTTRADES == null) {
+//                LASTTRADES = new ArrayList<>();
+//                LASTTRADES.add(Properties.TRADE_FILE_HEAD);
+//            }
+//
+//            LASTTRADES.add(TRADE);
+//
+//            Output.writeData(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING, LASTTRADES);
 
-            if (LASTTRADES == null) {
-                LASTTRADES = new ArrayList<>();
-                LASTTRADES.add(Properties.TRADE_FILE_HEAD);
-            }
-
-            LASTTRADES.add(TRADE);
-
-            Output.writeData(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING, LASTTRADES);
+            //System.out.println(value.getOHLC() - value.getClose());
 
             TOKEN = 0;
 
