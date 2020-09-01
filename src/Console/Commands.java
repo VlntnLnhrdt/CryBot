@@ -19,14 +19,14 @@ public class Commands {
 
     void addCommands(){
 
-        allCommands.add("exit");
-        allCommands.add("capital");
-        allCommands.add("gpd");
-        allCommands.add("gpw");
-        allCommands.add("gpm");
-        allCommands.add("gpy");
-        allCommands.add("trendHoppingShortTerm");
-        allCommands.add("help");
+        allCommands.add("exit"); // Schließt das Programm
+        allCommands.add("capital"); // zeigt das Kapital in € an  (Token werden umgerechnet)
+        allCommands.add("gpd"); // growth per day
+        allCommands.add("gpw"); // growth per week
+        allCommands.add("gpm"); // growth per month
+        allCommands.add("gpy"); // growth per year
+        allCommands.add("trendHoppingShortTerm");// Führt die Strategie aus
+        allCommands.add("help");// Zeigt alle Commands an
 
 
     }

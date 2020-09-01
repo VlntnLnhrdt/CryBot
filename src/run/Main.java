@@ -58,7 +58,6 @@ public class Main {
 
         Logger.logEnd();
         Bank.printResults(list.get(list.size()-1).getOHLC());
-        Bank.saveTrades();
 
     }
 
