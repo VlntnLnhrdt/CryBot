@@ -12,9 +12,9 @@ public class DataStamp {
 
     public String getTIMESTAMP() { return TIMESTAMP; }
 
-    private final String SYMBOL;
-    private final String TIMESTAMP;
-    private final double OHLC;
+    private final String SYMBOL;    // Pair-Name
+    private final String TIMESTAMP; // Zeitstempel
+    private final double OHLC;      // Open,High,Low,Close-Durchschnitt
 
     public DataStamp(String timestamp, String symbol, double ohlc) {
         this.SYMBOL    = symbol;
