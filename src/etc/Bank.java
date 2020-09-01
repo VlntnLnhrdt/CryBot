@@ -1,8 +1,11 @@
 package etc;
 
+import io.Input;
 import io.Output;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Bank {
@@ -12,39 +15,38 @@ public class Bank {
 
     // NumberOfTrades
     private static int NOT = 1;
-
-    private static List<String> TRADES = new ArrayList<>();
-    private static String TRADE   = "Trading History\n" +
-            "TradeNo - Timestamp - Info";
+    private static String TRADE;
 
     private static double FEELOST      = 0;
     private static double OVERALLSALES = 0;
 
     private static double BUYPRICE = 0;
 
+    private static Date DATEWEEK;
+    private static SimpleDateFormat SDFWEEK = new SimpleDateFormat("yyyy-ww");
+
+    // Zurücksetzen aller Daten (Testzwecke)
     public static void reset() {
         TOKEN   = 0;
         CAPITAL = Properties.CAPITAL;
         NOT     = 1;
-        TRADES  = new ArrayList<>();
-        TRADE   = "Trading History\n" +
-                "TradeNo - Timestamp - Info";
         FEELOST = 0;
     }
 
     public static void buy(DataStamp value) {
         if (TOKEN == 0 && CAPITAL > 0) {
-            FEELOST += CAPITAL * Properties.FEE;
 
-            OVERALLSALES += CAPITAL;
+            FEELOST += CAPITAL * Properties.FEE; // Verlust durch Gebühren
 
+            OVERALLSALES += CAPITAL; // Umsatz
+
+            // Ausrechnen von Token / Kapital
             TOKEN = (CAPITAL * Properties.CALCFEE) / value.getOHLC();
             CAPITAL = 0;
-            TRADES.add(TRADE);
 
             BUYPRICE = value.getOHLC();
 
-            TRADE = (NOT++) + " - "+ value.getTIMESTAMP() +" - BUY at " + cutDouble(value.getOHLC()) + "€ ";
+            TRADE = (NOT++) + " - BUY at "+ value.getTIMESTAMP() +" for " + cutDouble(value.getOHLC()) + "€";
         }
     }
 
@@ -56,7 +58,20 @@ public class Bank {
 
             CAPITAL = (TOKEN * value.getOHLC()) * Properties.CALCFEE;
 
-            TRADE += "SELL at " + cutDouble(value.getOHLC()) + "€ with a result of " + cutDouble(value.getOHLC() - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
+            TRADE += " - SELL at " + value.getTIMESTAMP() + " for " + cutDouble(value.getOHLC()) + "€ with a result of " + cutDouble(value.getOHLC() - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
+
+            // Live-Writing der Trade-History Datei
+            DATEWEEK = new Date();
+            List<String> LASTTRADES = Input.getContent(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING);
+
+            if (LASTTRADES == null) {
+                LASTTRADES = new ArrayList<>();
+                LASTTRADES.add(Properties.TRADE_FILE_HEAD);
+            }
+
+            LASTTRADES.add(TRADE);
+
+            Output.writeData(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING, LASTTRADES);
 
             TOKEN = 0;
 
@@ -64,10 +79,12 @@ public class Bank {
         }
     }
 
+    // TODO Feelost und Overall Sales neu einbringen (Lösung finden)
+    /*
     public static void saveTrades() {
         TRADES.add("Lost trough Fees: " +FEELOST+"€ and "+OVERALLSALES+"€ overall sales");
-        Output.writeData("Trade-History.csv", TRADES);
     }
+    */
 
     public static void printResults(double price) {
         if (TOKEN != 0)
