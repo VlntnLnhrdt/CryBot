@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Input {
 
+    // Auslesen von bereits vorliegenden Daten
     public static List<DataStamp> getData(String filename) {
 
         Logger.logStart("Reading "+filename);
@@ -47,12 +48,13 @@ public class Input {
         return list;
     }
 
+    // Auslesen von Daten jeglicher Art mit Logger
     public static List<String> getContent(String filename) {
         return getContent(filename, true);
     }
 
 
-    // silent Reading mit "log = false" möglich
+    // Auslesen von Daten jeglicher Art mit optionalem Logger
     public static List<String> getContent(String filename, boolean log) {
 
         if (log)
