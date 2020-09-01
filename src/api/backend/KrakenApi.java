@@ -1,4 +1,4 @@
-package api;
+package api.backend;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
