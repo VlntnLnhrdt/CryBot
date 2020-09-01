@@ -1,6 +1,6 @@
 package run;
 
-import api.API;
+import Console.Controller;
 import etc.Bank;
 import etc.DataStamp;
 import etc.Statistics;
@@ -13,20 +13,36 @@ import java.util.List;
 
 public class Main {
 
-    List<DataStamp> list;
+    public List<DataStamp> list;
+
+    Controller con;
+    public static Thread consThread;
+
 
     public static void main(String[] args) {
 
         Main main = new Main();
         main.list =  Input.getData("Kraken_BTCEUR_1h.csv");
 
-        main.runTrendHoppingShortTerm_Strategy();
+        main.con = new Controller(main);
 
-        Statistics.SHOW_GROWTH_PER_DAY();
+
+        main.runConsole();
 
     }
 
-    void runTrendHoppingShortTerm_Strategy(){
+    void runConsole(){
+
+        System.out.println("Console running... ready for input");
+
+        consThread = new Thread(() -> con.update());
+
+        consThread.start();
+
+    }
+
+
+    public void runTrendHoppingShortTerm_Strategy(){
 
         TrendHoppingShortTerm.importList(list);
         TrendHoppingShortTerm.setLastValue(1);
