@@ -7,12 +7,14 @@ import run.Main;
 
 public class CommandExecuter {
 
-    static void exec(String command, Main main){
+    static void exec(String command, Main main){//Commands werden abgeglichen und ausgeführt
 
 
         if(command.equals("exit")){
+
            System.out.println("exiting...");
            System.exit(123456789);
+
         }else if(command.equals("capital")){
 
             if(Bank.getCAPITAL() == 0){

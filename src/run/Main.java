@@ -35,7 +35,7 @@ public class Main {
 
         System.out.println("Console running... ready for input");
 
-        consThread = new Thread(() -> con.update());
+        consThread = new Thread(() -> con.update()); // Die Console läuf in einem eigenen Thread, da sie sonst den rest des Programms blockieren würde
 
         consThread.start();
 

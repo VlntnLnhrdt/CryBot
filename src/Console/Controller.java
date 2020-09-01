@@ -22,8 +22,6 @@ public class Controller {
         timer = new Timer();
         commands = new Commands();
 
-
-
     }
 
     public void update(){
@@ -43,17 +41,17 @@ public class Controller {
 
     void checkConsole(){
 
-        String consoleContent = sc.next();
+        String consoleContent = sc.next(); // Consoleneingabe wird abgefragt
 
         for(String s : Commands.allCommands){
 
-            if(s.contains(consoleContent)){
+            if(s.contains(consoleContent)){ // Wenn der eingegebene Command meit einem Teil eines vordefinierten Command übereinstimmt wird dieser ausgeführt
 
                 System.out.println("Command detected: "+s+"\n");
 
                 CommandExecuter.exec(s, main);
 
-                System.out.println();
+                System.out.println(); // Für die Optik
 
             }
 
