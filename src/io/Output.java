@@ -23,11 +23,16 @@ public class Output {
     }
 
     public static void writeData(String name, List<String> list) {
+        writeData(name, list, true);
+    }
 
-        Logger.logStart("Writing data into file");
+    public static void writeData(String name, List<String> list, boolean log) {
+
+        if (log)
+            Logger.logStart("Writing data into file");
 
         try {
-            BufferedWriter wr = new BufferedWriter(new FileWriter(Properties.DATAPATH+name));
+            BufferedWriter wr = new BufferedWriter(new FileWriter(Properties.DATAPATH + name));
 
             for (String line : list) {
                 wr.write(line);
@@ -40,7 +45,8 @@ public class Output {
             e.printStackTrace();
         }
 
-        Logger.logEnd();
+        if (log)
+            Logger.logEnd();
 
 
     }

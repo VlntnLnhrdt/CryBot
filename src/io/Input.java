@@ -12,15 +12,15 @@ import java.util.List;
 
 public class Input {
 
-    public static List<DataStamp> getData(String fileName) {
+    public static List<DataStamp> getData(String filename) {
 
-        Logger.logStart("Reading "+fileName);
+        Logger.logStart("Reading "+filename);
 
         List<DataStamp> list = new ArrayList<>();
         String line;
 
         try {
-            BufferedReader rd = new BufferedReader(new FileReader(Properties.DATAPATH + fileName));
+            BufferedReader rd = new BufferedReader(new FileReader(Properties.DATAPATH + filename));
 
             rd.readLine();
             rd.readLine();
@@ -42,7 +42,41 @@ public class Input {
 
         Logger.logEnd();
 
-        Output.writeDataStamps(fileName+"_generated.csv",list);
+        Output.writeDataStamps(filename+"_generated.csv",list);
+
+        return list;
+    }
+
+    public static List<String> getContent(String filename) {
+        return getContent(filename, true);
+    }
+
+
+    // silent Reading mit "log = false" möglich
+    public static List<String> getContent(String filename, boolean log) {
+
+        if (log)
+            Logger.logStart("Reading "+ filename);
+
+        List<String> list = new ArrayList<>();
+        String line;
+
+        try {
+            BufferedReader rd = new BufferedReader(new FileReader(Properties.DATAPATH + filename));
+
+            while ((line = rd.readLine()) != null)
+                list.add(line);
+
+            rd.close();
+
+        } catch (FileNotFoundException e) {
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (log)
+            Logger.logEnd();
 
         return list;
     }
