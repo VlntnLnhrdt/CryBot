@@ -45,7 +45,7 @@ public class Controller {
 
         for(String s : Commands.allCommands){
 
-            if(s.contains(consoleContent)){ // Wenn der eingegebene Command meit einem Teil eines vordefinierten Command übereinstimmt wird dieser ausgeführt
+            if(s.contains(consoleContent)){ // Wenn der eingegebene Command mit einem Teil eines vordefinierten Command übereinstimmt wird dieser ausgeführt
 
                 System.out.println("Command detected: "+s+"\n");
 

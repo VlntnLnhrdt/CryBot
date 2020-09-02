@@ -13,7 +13,7 @@ public class CommandExecuter {
         if(command.equals("exit")){
 
            System.out.println("exiting...");
-           System.exit(123456789);
+           System.exit(27372);
 
         }else if(command.equals("capital")){
 
@@ -39,7 +39,7 @@ public class CommandExecuter {
 
             Statistics.SHOW_GROWTH_PER_YEAR();
 
-        }else if(command.equals("trendHoppingShortTerm")){
+        }else if(command.equals("trendHoppingShortTerm") || command.equals("run")){
 
             main.runTrendHoppingShortTerm_Strategy();
 

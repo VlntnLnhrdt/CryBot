@@ -26,6 +26,7 @@ public class Commands {
         allCommands.add("gpm"); // growth per month
         allCommands.add("gpy"); // growth per year
         allCommands.add("trendHoppingShortTerm");// Führt die Strategie aus
+        allCommands.add("run"); // Führt die Strategie aus
         allCommands.add("help");// Zeigt alle Commands an
 
 
