@@ -34,47 +34,46 @@ public class Bank {
     }
 
     public static void buy(DataStamp value) {
-        if (TOKEN == 0 && CAPITAL > 0 && value.getOHLC() - value.getClose() > -100) {//die differenz zwischen breechnetem- und richtigen-Preis darf maximal 100€ betragen
+        if (TOKEN == 0 && CAPITAL > 0 && value.getSPECIALVALUE() - value.getSPECIALVALUE() > -100) {//die differenz zwischen breechnetem- und richtigen-Preis darf maximal 100€ betragen
 
             FEELOST += CAPITAL * Properties.FEE; // Verlust durch Gebühren
 
             OVERALLSALES += CAPITAL; // Umsatz
 
             // Ausrechnen von Token / Kapital
-            TOKEN = (CAPITAL * Properties.CALCFEE) / value.getOHLC();
+            TOKEN = (CAPITAL * Properties.CALCFEE) / value.getSPECIALVALUE();
             CAPITAL = 0;
 
-            BUYPRICE = value.getOHLC();
+            BUYPRICE = value.getSPECIALVALUE();
 
-            TRADE = (NOT++) + " - BUY at "+ value.getTIMESTAMP() +" for " + cutDouble(value.getOHLC()) + "€";
-
-           // System.out.println(value.getOHLC() - value.getClose());
+            TRADE = (NOT++) + " - BUY at "+ value.getTIMESTAMP() +" for " + cutDouble(value.getSPECIALVALUE()) + "€";
 
         }
     }
 
     public static void sell(DataStamp value) {
-        if (CAPITAL == 0 && TOKEN > 0 && value.getOHLC() - value.getClose() < 100) {
+        if (CAPITAL == 0 && TOKEN > 0 && value.getSPECIALVALUE() - value.getSPECIALVALUE() < 100) {
             FEELOST += CAPITAL * Properties.FEE;
 
-            OVERALLSALES += TOKEN * value.getOHLC();
+            OVERALLSALES += TOKEN * value.getSPECIALVALUE();
 
-            CAPITAL = (TOKEN * value.getOHLC()) * Properties.CALCFEE;
+            CAPITAL = (TOKEN * value.getSPECIALVALUE()) * Properties.CALCFEE;
 
-            TRADE += " - SELL at " + value.getTIMESTAMP() + " for " + cutDouble(value.getOHLC()) + "€ with a result of " + cutDouble(value.getOHLC() - BUYPRICE) + "€ equals " + cutDouble((value.getOHLC() - BUYPRICE) * TOKEN) + "€";
+            TRADE += " - SELL at " + value.getTIMESTAMP() + " for " + cutDouble(value.getSPECIALVALUE()) + "€ with a result of " + cutDouble(value.getSPECIALVALUE() - BUYPRICE) + "€ equals " + cutDouble((value.getSPECIALVALUE() - BUYPRICE) * TOKEN) + "€";
 
             // Live-Writing der Trade-History Datei
-//            DATEWEEK = new Date();
-//            List<String> LASTTRADES = Input.getContent(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING);
-//
-//            if (LASTTRADES == null) {
-//                LASTTRADES = new ArrayList<>();
-//                LASTTRADES.add(Properties.TRADE_FILE_HEAD);
-//            }
-//
-//            LASTTRADES.add(TRADE);
-//
-//            Output.writeData(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING, LASTTRADES);
+
+            DATEWEEK = new Date();
+            List<String> LASTTRADES = Input.getContent(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING);
+
+            if (LASTTRADES == null) {
+                LASTTRADES = new ArrayList<>();
+                LASTTRADES.add(Properties.TRADE_FILE_HEAD);
+            }
+
+            LASTTRADES.add(TRADE);
+
+            Output.writeData(SDFWEEK.format(DATEWEEK) + Properties.TRADE_FILE_ENDING, LASTTRADES);
 
             //System.out.println(value.getOHLC() - value.getClose());
 

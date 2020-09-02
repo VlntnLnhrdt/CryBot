@@ -30,7 +30,7 @@ public class Input {
 
                 String[] splits = line.split(",");
 
-                list.add(0 ,new DataStamp(splits[0], splits[1], ((Double.parseDouble(splits[2]) + Double.parseDouble(splits[3]) + Double.parseDouble(splits[4]) + Double.parseDouble(splits[5])) / 4), Double.parseDouble(splits[5])));
+                list.add(0 ,new DataStamp(splits[0], splits[1], ((Double.parseDouble(splits[2]) + Double.parseDouble(splits[3]) + Double.parseDouble(splits[4]) + Double.parseDouble(splits[5])) / 4), Double.parseDouble(splits[2])));
 
 
             }

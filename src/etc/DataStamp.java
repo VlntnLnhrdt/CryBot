@@ -9,8 +9,9 @@ public class DataStamp {
     public double getOHLC() {
         return OHLC;
     }
-    public double getClose() {
-        return close;
+
+    public double getSPECIALVALUE() {
+        return SPECIAL;
     }
 
     public String getTIMESTAMP() { return TIMESTAMP; }
@@ -18,16 +19,16 @@ public class DataStamp {
     private final String SYMBOL;    // Pair-Name
     private final String TIMESTAMP; // Zeitstempel
     private final double OHLC;      // Open,High,Low,Close-Durchschnitt
-    private final double close;
+    private final double SPECIAL;     // Close-Wert
 
-    public DataStamp(String timestamp, String symbol, double ohlc, double close) {
+    public DataStamp(String timestamp, String symbol, double ohlc, double special) {
         this.SYMBOL    = symbol;
         this.TIMESTAMP = timestamp;
         this.OHLC      = ohlc;
-        this.close = close;
+        this.SPECIAL    = special;
     }
 
     public String print() {
-        return getTIMESTAMP()+","+getSYMBOL()+","+getOHLC();
+        return getTIMESTAMP()+","+getSYMBOL()+","+ getSPECIALVALUE();
     }
 }

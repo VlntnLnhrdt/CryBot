@@ -3,7 +3,6 @@ package run;
 import Console.Controller;
 import etc.Bank;
 import etc.DataStamp;
-import etc.Statistics;
 import io.Input;
 import io.Logger;
 import strats.TrendHoppingShortTerm;
@@ -35,7 +34,7 @@ public class Main {
 
         System.out.println("Console running... ready for input");
 
-        consThread = new Thread(() -> con.update()); // Die Console läuft in einem eigenen Thread, da sie sonst den rest des Programms blockieren würde
+        consThread = new Thread(() -> con.update());
 
         consThread.start();
 
